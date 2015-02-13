@@ -44,6 +44,10 @@
      - spark-env.sh
   tags: ["configuration","spark"]
 
+- name: add symlink for hive-site.xml
+  file: state=link src={{spark_hive_site_path}} dest={{spark_install_dir}}/conf/hive-site.xml
+  tags: ["configuration","spark"]
+
 - name: add symlink for default spark version
   when: spark_set_as_default
   file: state=link src={{spark_install_dir}} dest={{spark_link_dir}}
