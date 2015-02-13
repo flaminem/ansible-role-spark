@@ -7,3 +7,4 @@ spark_compile_options: "-Phive -Pyarn"
 spark_environment: {}
 spark_user: "spark"
 spark_group: "{{spark_user}}"
+spark_set_as_default: yes

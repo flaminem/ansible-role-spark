@@ -45,6 +45,7 @@
   tags: ["configuration","spark"]
 
 - name: add symlink for default spark version
+  when: spark_set_as_default
   file: state=link src={{spark_install_dir}} dest={{spark_link_dir}}
   tags: ["configuration","spark"]
 
