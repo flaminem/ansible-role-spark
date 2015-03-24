@@ -9,3 +9,4 @@ spark_user: "spark"
 spark_group: "{{spark_user}}"
 spark_set_as_default: yes
 spark_hive_site_path: "/etc/hive/conf/hive-site.xml"
+spark_hbase_site_path: "/etc/hbase/conf/hbase-site.xml"
