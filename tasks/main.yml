@@ -1,5 +1,5 @@
 ---
-- name: install spark dependancy for Debian OS family
+- name: install spark dependency for Debian OS family
   apt: pkg=git
   environment: spark_environment
   when: ansible_os_family == 'Debian'
@@ -24,9 +24,11 @@
      repo={{spark_repository}} dest={{spark_install_dir}} 
      version={{spark_version}} update=yes depth=1 
   environment: spark_environment
+  register: spark_git_result
   tags: ["packages","spark"]
 
 - name: spark compilation
+  when: (not spark_git_result|skipped) and (spark_git_result|changed or spark_recompile is defined)
   sudo_user: "{{spark_user}}"
   shell: "{{item}}"
   args:
@@ -45,11 +47,11 @@
   tags: ["configuration","spark"]
 
 - name: add symlink for hive-site.xml
-  file: state=link src={{spark_hive_site_path}} dest={{spark_install_dir}}/conf/hive-site.xml
+  file: state=link src={{spark_hive_site_path}} dest={{spark_install_dir}}/conf/hive-site.xml force=yes
   tags: ["configuration","spark"]
 
 - name: add symlink for hbase-site.xml
-  file: state=link src={{spark_hive_site_path}} dest={{spark_install_dir}}/conf/hbase-site.xml
+  file: state=link src={{spark_hive_site_path}} dest={{spark_install_dir}}/conf/hbase-site.xml force=yes
   tags: ["configuration","spark"]
 
 - name: add symlink for default spark version
