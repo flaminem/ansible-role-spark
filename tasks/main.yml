@@ -51,7 +51,11 @@
   tags: ["configuration","spark"]
 
 - name: add symlink for hbase-site.xml
-  file: state=link src={{spark_hive_site_path}} dest={{spark_install_dir}}/conf/hbase-site.xml force=yes
+  file: state=link src={{spark_hbase_site_path}} dest={{spark_install_dir}}/conf/hbase-site.xml force=yes
+  tags: ["configuration","spark"]
+
+- name: add symlink for yarn-site.xml
+  file: state=link src={{spark_yarn_site_path}} dest={{spark_install_dir}}/conf/yarn-site.xml force=yes
   tags: ["configuration","spark"]
 
 - name: add symlink for default spark version
