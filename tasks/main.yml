@@ -58,6 +58,14 @@
   file: state=link src={{spark_yarn_site_path}} dest={{spark_install_dir}}/conf/yarn-site.xml force=yes
   tags: ["configuration","spark"]
 
+- name: add symlink for hdfs-site.xml
+  file: state=link src={{spark_hdfs_site_path}} dest={{spark_install_dir}}/conf/hdfs-site.xml force=yes
+  tags: ["configuration","spark"]
+
+- name: add symlink for core-site.xml
+  file: state=link src={{spark_core_site_path}} dest={{spark_install_dir}}/conf/core-site.xml force=yes
+  tags: ["configuration","spark"]
+
 - name: add symlink for default spark version
   when: spark_set_as_default
   file: state=link src={{spark_install_dir}} dest={{spark_link_dir}}

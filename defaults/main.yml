@@ -11,3 +11,5 @@ spark_set_as_default: yes
 spark_hive_site_path: "/etc/hive/conf/hive-site.xml"
 spark_hbase_site_path: "/etc/hbase/conf/hbase-site.xml"
 spark_yarn_site_path: "/etc/hadoop/conf/yarn-site.xml"
+spark_hdfs_site_path: "/etc/hadoop/conf/hdfs-site.xml"
+spark_core_site_path: "/etc/hadoop/conf/core-site.xml"
