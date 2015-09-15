@@ -2,7 +2,7 @@
 - name: install spark dependency for Debian OS family
   apt: pkg=git
   environment: spark_environment
-  when: ansible_os_family == 'Debian'
+  when: ansible_os_family in ['Debian', 'Linuxmint']
   tags: ["packages","spark"]
 
 - name: ensure spark group exist
