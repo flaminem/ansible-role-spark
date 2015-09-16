@@ -1,0 +1,28 @@
+---
+- name: install spark dependency for Debian OS family
+  apt: pkg=git
+  environment: spark_environment
+  when: ansible_os_family == 'Debian'
+  tags: [packages,spark]
+
+- name: retreive spark from git
+  sudo_user: "{{spark_user}}"
+  tags: packerio
+  git: > 
+     repo={{spark_repository}} dest={{spark_install_dir}} 
+     version="v{{spark_version}}" update=yes depth=1 
+  environment: spark_environment
+  register: spark_git_result
+  tags: [packages,spark]
+
+- name: spark compilation
+  when: (not spark_git_result|skipped) and (spark_git_result|changed or spark_recompile is defined)
+  sudo_user: "{{spark_user}}"
+  shell: "{{item}}"
+  args:
+    chdir: "{{spark_install_dir}}"
+  environment: spark_environment
+  with_items:
+     # - mvn dependency:resolve
+     - "{{spark_compile_command}}"
+  tags: ["compilation","spark"]

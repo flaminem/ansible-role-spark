@@ -1,0 +1,27 @@
+---
+- name: download packaged spark 
+  get_url: url={{spark_package_mirror}}/spark/spark-{{spark_version}}/spark-{{spark_version}}-bin-hadoop{{spark_hadoop_version}}.tgz
+           dest=/tmp/spark-{{spark_version}}-bin-hadoop{{spark_hadoop_version}}.tgz
+  environment:
+    http_proxy: "{{http_proxy}}"
+
+
+- name: extract from archive
+  unarchive: src=/tmp/spark-{{spark_version}}-bin-hadoop{{spark_hadoop_version}}.tgz 
+             dest=/tmp
+             copy=no
+             creates="/opt/spark-v{{spark_version}}"
+
+
+- name: Move foo to bar
+  command: creates="/opt/spark-v{{spark_version}}" mv /tmp/spark-{{spark_version}}-bin-hadoop{{spark_hadoop_version}} /opt/spark-v{{spark_version}}
+    
+
+- name: ensure spark install directory has correct and owner rights 
+  file: path=/opt/spark-v{{spark_version}} 
+        state=directory 
+        mode=0755
+        owner={{spark_user}}
+        group={{spark_user}}
+        recurse=yes
+

@@ -1,7 +1,8 @@
 ---
 spark_repository: "https://github.com/apache/spark.git"
-spark_version: "v1.1.0" #can be git tags/commit/branch
-spark_install_dir: "/opt/spark-{{spark_version}}"
+spark_version: "1.1.0" #can be git tags/commit/branch
+spark_hadoop_version: "2.4"
+spark_install_dir: "/opt/spark-v{{spark_version}}"
 spark_link_dir: "/opt/spark"
 spark_compile_command: "mvn -Phive -Pyarn"
 spark_environment: {}
@@ -13,3 +14,7 @@ spark_hbase_site_path: "/etc/hbase/conf/hbase-site.xml"
 spark_yarn_site_path: "/etc/hadoop/conf/yarn-site.xml"
 spark_hdfs_site_path: "/etc/hadoop/conf/hdfs-site.xml"
 spark_core_site_path: "/etc/hadoop/conf/core-site.xml"
+
+spark_package_mirror: "http://www.apache.org/dist"
+
+
