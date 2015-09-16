@@ -1,0 +1,32 @@
+---
+- name: configure spark
+  template: src={{item}}.j2 dest={{spark_install_dir}}/conf/{{item}} owner={{spark_user}}
+  with_items:
+     - spark-defaults.conf
+     - spark-env.sh
+  tags: ["configuration","spark"]
+
+- name: add symlink for hive-site.xml
+  file: state=link src={{spark_hive_site_path}} dest={{spark_install_dir}}/conf/hive-site.xml force=yes
+  tags: ["configuration","spark"]
+
+- name: add symlink for hbase-site.xml
+  file: state=link src={{spark_hbase_site_path}} dest={{spark_install_dir}}/conf/hbase-site.xml force=yes
+  tags: ["configuration","spark"]
+
+- name: add symlink for yarn-site.xml
+  file: state=link src={{spark_yarn_site_path}} dest={{spark_install_dir}}/conf/yarn-site.xml force=yes
+  tags: ["configuration","spark"]
+
+- name: add symlink for hdfs-site.xml
+  file: state=link src={{spark_hdfs_site_path}} dest={{spark_install_dir}}/conf/hdfs-site.xml force=yes
+  tags: ["configuration","spark"]
+
+- name: add symlink for core-site.xml
+  file: state=link src={{spark_core_site_path}} dest={{spark_install_dir}}/conf/core-site.xml force=yes
+  tags: ["configuration","spark"]
+
+- name: configure spark env for user
+  template: src=spark.sh.j2 dest=/etc/profile.d/spark.sh
+  tags: ["configuration","spark"]
+
