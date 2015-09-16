@@ -7,10 +7,6 @@
   user: name={{spark_user}} group={{spark_group}}
   tags: [packages,spark]
 
-- name: ensure spark install dir exist and belong to spark user
-  file: state=directory path={{spark_install_dir}} owner={{spark_user}} group={{spark_group}} recurse=yes
-  tags: [packages,spark]
-
 - include: install_before_1.5.yml
   when: spark_version | version_compare('1.5', '<') 
   tags: [packages,spark]
