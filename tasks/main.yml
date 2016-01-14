@@ -1,25 +1,9 @@
 ---
-- name: ensure spark group exist
-  group: name={{spark_group}}
-  tags: [packages,spark]
+- include: uninstall.yml
+  when: spark_uninstall
+  tags: [spark]
 
-- name: ensure spark user exist
-  user: name={{spark_user}} group={{spark_group}}
-  tags: [packages,spark]
-
-- include: install_before_1.5.yml
-  when: spark_version | version_compare('1.5', '<') 
-  tags: [packages,spark]
-
-- include: install_after_1.5.yml
-  when: spark_version | version_compare('1.5', '>=')
-  tags: [packages,spark]
-
-- include: configure.yml
-  tags: [packages,spark]
-
-- name: add symlink for default spark version
-  when: spark_set_as_default
-  file: state=link src={{spark_install_dir}} dest={{spark_link_dir}}
-  tags: ["configuration","spark"]
-
+- include: install.yml
+  when: not spark_uninstall
+  tags: [spark]
+  

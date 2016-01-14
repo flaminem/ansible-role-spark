@@ -1,0 +1,4 @@
+---
+- name: Ensure spark is uninstalled
+  file: path=/opt/spark-v{{spark_version}} state=absent
+

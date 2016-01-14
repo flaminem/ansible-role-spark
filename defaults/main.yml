@@ -17,4 +17,4 @@ spark_core_site_path: "/etc/hadoop/conf/core-site.xml"
 
 spark_package_mirror: "http://www.apache.org/dist"
 
-
+spark_uninstall: false
