@@ -2,7 +2,7 @@
 - name: download packaged spark 
   get_url: url={{spark_package_mirror}}/spark/spark-{{spark_version}}/spark-{{spark_version}}-bin-hadoop{{spark_hadoop_version}}.tgz
            dest=/tmp/spark-{{spark_version}}-bin-hadoop{{spark_hadoop_version}}.tgz
-  environment: spark_environment
+  environment: "{{ spark_environment }}"
 
 - name: extract from archive to tmp
   unarchive: src=/tmp/spark-{{spark_version}}-bin-hadoop{{spark_hadoop_version}}.tgz 
