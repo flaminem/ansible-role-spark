@@ -4,6 +4,7 @@
   with_items:
      - spark-defaults.conf
      - spark-env.sh
+     - log4j.properties
   tags: ["configuration","spark"]
 
 - name: add symlink for hive-site.xml
