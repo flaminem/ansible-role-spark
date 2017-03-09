@@ -10,7 +10,7 @@
   tags: [packages,spark]
 
 - name: retreive spark from git
-  sudo_user: "{{spark_user}}"
+  become_user: "{{spark_user}}"
   tags: packerio
   git: > 
      repo={{spark_repository}} dest={{spark_install_dir}} 
@@ -21,7 +21,7 @@
 
 - name: spark compilation
   when: (not spark_git_result|skipped) and (spark_git_result|changed or spark_recompile is defined)
-  sudo_user: "{{spark_user}}"
+  become_user: "{{spark_user}}"
   shell: "{{item}}"
   args:
     chdir: "{{spark_install_dir}}"
